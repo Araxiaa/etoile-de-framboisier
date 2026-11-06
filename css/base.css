@@ -1,56 +1,65 @@
 /* ==========================================================================
-   BASE — couleurs, polices, papier aquarelle.
+   BASE — la direction artistique d'Étoile de Framboisier.
+   Tout vient de ses illustrations : pelage crème et abricot, trait brun appuyé,
+   yeux turquoise, freesias mauves, cercle vert mousse, crayonné chaud.
    C'est ici qu'on change l'identité visuelle du site.
    Les polices sont chargées par les <link> dans le <head> de chaque page.
    ========================================================================== */
 
 :root {
-    /* Le papier et la forêt du Tonnerre */
-    --brume: #F5EFDF;            /* fond de page : papier chaud */
-    --brume-profonde: #DDD3BB;   /* filets, bordures */
-    --creme: #FCF8EE;            /* surfaces : cartes */
-    --creme-ombre: #EEE6D1;
+    /* Le papier : un crème chaud, comme le fond de ses doodles */
+    --brume: #FFF0DB;            /* fond de page */
+    --brume-profonde: #EBCFA3;   /* filets doux, séparations discrètes */
+    --creme: #FFFAF0;            /* surfaces : cartes */
+    --creme-ombre: #FCE7C8;
 
-    --sauge: #B5C9A8;
-    --sauge-pale: #DFE9D3;
-    --mousse: #5E8061;
-    --foret: #2F4B3F;
+    /* Le trait : le brun de ses contours */
+    --trait: #7A4A2B;
 
-    /* Ses yeux d'azur */
-    --azur: #6FAFD0;
-    --azur-pale: #DCEBEF;
-    --azur-profond: #2C6A8C;
+    /* Son pelage colourpoint : crème au centre, abricot aux extrémités */
+    --roux: #E59A45;             /* abricot / miel */
+    --roux-pale: #FFDDAE;
+    --roux-texte: #8A4A12;
+    --miel: #F0C27B;
 
-    /* Son pelage red point */
-    --roux: #D9803E;
-    --roux-pale: #F3D9C2;
-    --roux-texte: #8A4A17;
+    /* Ses yeux turquoise, le ciel de ses fonds */
+    --azur: #43BEE3;
+    --azur-pale: #D5ECF8;
+    --azur-profond: #1C7C9F;
 
-    /* Le fruit */
-    --framboise: #B23A5C;
-    --framboise-pale: #F6DDE4;
+    /* Le cercle de feuillage derrière lui, la forêt du Tonnerre */
+    --sauge: #A9BF8C;
+    --sauge-pale: #E3EDD2;
+    --mousse: #6A8450;
+    --foret: #3F5B34;
 
-    /* Texte */
-    --encre: #27342E;
-    --encre-douce: #5A6A60;
-    --aversion: #5B4A6B;         /* cœur sombre */
+    /* Ses freesias mauves : le framboise de son nom */
+    --framboise: #A8497F;
+    --framboise-pale: #F4DAE8;
+    --aversion: #6B4B7A;         /* cœur sombre */
+
+    /* Texte : un brun chaud, jamais noir */
+    --encre: #4A2B1E;
+    --encre-douce: #7C5A47;
 
     /* Effets */
-    --ciel-haut: #E3EBDA;
-    --verre: rgba(252, 248, 238, 0.78);
-    --ombre: 0 1px 2px rgba(39, 52, 46, 0.06), 0 10px 26px -14px rgba(47, 75, 63, 0.35);
-    --ombre-haute: 0 2px 4px rgba(39, 52, 46, 0.08), 0 22px 40px -16px rgba(47, 75, 63, 0.5);
+    --ciel-haut: #D5ECF8;
+    --verre: rgba(255, 250, 240, 0.9);
+    --ombre: 3px 4px 0 rgba(122, 74, 43, 0.28);            /* ombre franche, comme un autocollant */
+    --ombre-haute: 5px 7px 0 rgba(122, 74, 43, 0.38);
     --nuage: #fff;
-    --grain: 0.5;                /* intensité du grain de papier */
+    --grain: 0.55;               /* intensité du grain de papier */
+    --bord: 2.5px solid var(--trait);
+    --onde: var(--creme-ombre);
 
     --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --sans: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --main: 'Caveat', 'Segoe Print', cursive;   /* annotations écrites à la main */
 
     --mesure: 66ch;
-    --rayon-l: 28px;
-    --rayon-m: 16px;
-    --rayon-s: 10px;
+    --rayon-l: 30px 36px 28px 34px / 34px 28px 36px 30px;   /* des angles un peu irréguliers : dessinés à la main */
+    --rayon-m: 20px 24px 18px 22px / 22px 18px 24px 20px;
+    --rayon-s: 12px;
 
     /* Signature : la couleur n'existe qu'aux extrémités */
     --pelage: linear-gradient(90deg,
@@ -60,40 +69,44 @@
     color-scheme: light;
 }
 
-/* ---------- Thème sombre : la forêt la nuit ----------
+/* ---------- Thème sombre : la nuit de lune sur le territoire ----------
    Automatique selon l'appareil, ou choisi avec le bouton du menu. */
 :root[data-theme="dark"] {
-    --brume: #0E1A19;
-    --brume-profonde: #29403B;
-    --creme: #16262A;
-    --creme-ombre: #1D3236;
+    --brume: #1D1A2B;
+    --brume-profonde: #3B3552;
+    --creme: #2A2540;
+    --creme-ombre: #342E4D;
 
-    --sauge: #5E8061;
-    --sauge-pale: #1F3A33;
-    --mousse: #8FB48E;
-    --foret: #A9C9A6;
+    --trait: #F2C98F;
 
-    --azur: #6FAFD0;
-    --azur-pale: #1B3A4A;
-    --azur-profond: #8CC6E3;
+    --roux: #F0A653;
+    --roux-pale: #4D3A33;
+    --roux-texte: #F6C58E;
+    --miel: #EBC27D;
 
-    --roux: #E59658;
-    --roux-pale: #4A3526;
-    --roux-texte: #F0B98A;
+    --azur: #5BCBEE;
+    --azur-pale: #1F3A56;
+    --azur-profond: #8AD8F4;
 
-    --framboise: #F08FAB;
-    --framboise-pale: #4A2634;
+    --sauge: #6F8F59;
+    --sauge-pale: #263A33;
+    --mousse: #9DBD83;
+    --foret: #B9D3A3;
 
-    --encre: #EEE9DD;
-    --encre-douce: #A7B7AE;
-    --aversion: #B3A2C8;
+    --framboise: #E58FBF;
+    --framboise-pale: #4A2B47;
+    --aversion: #B8A1CC;
 
-    --ciel-haut: #12302F;
-    --verre: rgba(14, 26, 25, 0.78);
-    --ombre: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 26px -14px rgba(0, 0, 0, 0.7);
-    --ombre-haute: 0 2px 4px rgba(0, 0, 0, 0.4), 0 22px 40px -16px rgba(0, 0, 0, 0.8);
+    --encre: #FFEFD8;
+    --encre-douce: #C7B6C4;
+
+    --ciel-haut: #1F2A4A;
+    --verre: rgba(29, 26, 43, 0.88);
+    --ombre: 3px 4px 0 rgba(0, 0, 0, 0.45);
+    --ombre-haute: 5px 7px 0 rgba(0, 0, 0, 0.55);
     --nuage: #7E9AB0;
-    --grain: 0.18;
+    --grain: 0.2;
+    --onde: #262142;
 
     color-scheme: dark;
 }
@@ -122,21 +135,22 @@ body::before {
     pointer-events: none;
     opacity: var(--grain);
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .25  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .36  0 0 0 0 .17  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 :root[data-theme="dark"] body::before { mix-blend-mode: screen; }
 
 h1, h2, h3, h4 {
     font-family: var(--serif);
-    font-weight: 500;
-    line-height: 1.15;
+    font-variation-settings: 'SOFT' 100;      /* des lettres rondes et douces */
+    font-weight: 600;
+    line-height: 1.12;
     margin: 0;
     color: var(--encre);
     text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 400; letter-spacing: -0.015em; }
-h2 { font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 400; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.015em; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 650; letter-spacing: -0.01em; }
 h3 { font-size: 1.3rem; }
 h4 { font-size: 1.08rem; }
 
@@ -145,12 +159,12 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 a { color: var(--azur-profond); text-underline-offset: 3px; }
 a:hover { color: var(--framboise); }
 
-::selection { background: var(--framboise-pale); color: var(--encre); }
+::selection { background: var(--azur); color: #fff; }
 
 :focus-visible {
-    outline: 3px solid var(--azur);
-    outline-offset: 3px;
-    border-radius: 4px;
+    outline: 3px dashed var(--azur);
+    outline-offset: 4px;
+    border-radius: 6px;
 }
 
 img { max-width: 100%; display: block; }
@@ -161,6 +175,7 @@ img { max-width: 100%; display: block; }
     top: 8px;
     background: var(--creme);
     padding: 8px 16px;
+    border: var(--bord);
     border-radius: var(--rayon-s);
     z-index: 200;
 }

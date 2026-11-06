@@ -30,7 +30,7 @@
     gap: 22px;
     padding: 26px 30px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-l);
     box-shadow: var(--ombre);
     transition: transform 0.3s ease, box-shadow 0.3s ease;

@@ -9,7 +9,7 @@
     padding: 8px 22px;
     border-radius: 999px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     box-shadow: var(--ombre);
 }
 .origine .note-main { margin-right: 6px; }
@@ -68,7 +68,7 @@
     align-items: center;
     gap: 4px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: 28px 28px 22px 22px;
     box-shadow: var(--ombre);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -139,7 +139,7 @@
     align-items: center;
     gap: 6px;
     padding: 8px 18px;
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: 999px;
     background: var(--creme);
     color: var(--encre-douce);

@@ -29,7 +29,7 @@
     flex-direction: column;
     padding: 26px 28px 22px;
     border-radius: var(--rayon-l);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     background: var(--creme);
     box-shadow: var(--ombre);
     overflow: hidden;
@@ -127,18 +127,18 @@
     width: 100%;
     height: 100%;
     fill: var(--azur);
-    stroke: var(--azur);
-    stroke-width: 1.6;
+    stroke: var(--trait);
+    stroke-width: 1.3;
     stroke-linejoin: round;
-    filter: drop-shadow(0 0 10px rgba(111, 175, 208, 0.85)) drop-shadow(0 4px 6px rgba(47, 111, 149, 0.35));
-    transition: fill 0.3s ease, stroke 0.3s ease;
+    filter: drop-shadow(2px 3px 0 rgba(122, 74, 43, 0.4));
+    transition: fill 0.3s ease;
 }
-.orbe-num { position: relative; margin-top: 8px; font-family: var(--serif); font-size: 1.7rem; font-weight: 500; line-height: 1; color: #0F3347; }
-.orbe-don { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em; color: var(--encre-douce); }
-.orbe[aria-pressed="true"] .sym { fill: var(--framboise); stroke: var(--framboise); filter: drop-shadow(0 0 14px rgba(178, 58, 92, 0.6)); }
-.orbe[aria-pressed="true"] .orbe-num { color: #fff; }
+.orbe-num { position: relative; margin-top: 8px; font-family: var(--serif); font-size: 1.7rem; font-weight: 800; line-height: 1; color: #14394A; }
+.orbe-don { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; color: var(--encre-douce); }
+.orbe[aria-pressed="true"] .sym { fill: var(--roux); }
+.orbe[aria-pressed="true"] .orbe-num { color: #4A2B1E; }
 .orbe[aria-pressed="true"] .orbe-don { color: var(--framboise); }
-.orbe.perdue .sym { fill: none; stroke: var(--encre-douce); stroke-width: 1.1; stroke-dasharray: 2.6 2.2; filter: none; opacity: 0.85; }
+.orbe.perdue .sym { fill: none; stroke: var(--encre-douce); stroke-width: 1.2; stroke-dasharray: 2.6 2.2; filter: none; opacity: 0.9; }
 .orbe.perdue .orbe-num { color: var(--encre-douce); }
 .orbe.perdue[aria-pressed="true"] .sym { fill: var(--framboise-pale); stroke: var(--framboise); }
 .orbe.perdue[aria-pressed="true"] .orbe-num { color: var(--framboise); }
@@ -167,7 +167,7 @@
     position: relative;
     padding: 28px 32px 28px 36px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-l);
     box-shadow: var(--ombre);
     overflow: hidden;

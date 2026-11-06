@@ -12,7 +12,7 @@
     margin: 0 0 24px;
     break-inside: avoid;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-m);
     overflow: hidden;
 }
@@ -51,12 +51,12 @@
     width: min(96vw, 1100px);
     max-height: 94vh;
     padding: 0;
-    border: 0;
+    border: var(--bord);
     border-radius: var(--rayon-l);
     background: var(--creme);
     color: var(--encre);
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    box-shadow: 8px 10px 0 rgba(74, 43, 30, 0.45), 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 .visionneuse::backdrop { background: rgba(14, 24, 33, 0.82); backdrop-filter: blur(4px); }
 .visionneuse[open] { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }

@@ -14,7 +14,7 @@
         conteneur.className = 'ambiance';
         conteneur.setAttribute('aria-hidden', 'true');
 
-        var couleurs = ['var(--roux-pale)', 'var(--framboise-pale)', '#fff', 'var(--roux-pale)'];
+        var couleurs = ['#C07AAE', '#FFF3E0', '#E9B8D6', '#F7CF7F'];   // freesias mauves, crème, miel
         for (var i = 0; i < 9; i++) {
             var p = document.createElement('span');
             p.className = 'petale';

@@ -2,34 +2,37 @@
    COMPOSANTS — briques réutilisées sur plusieurs pages.
    ========================================================================== */
 
-/* ---------- Lavis d'aquarelle : taches de couleur en arrière-plan ----------
+/* ---------- Aplats de couleur en arrière-plan (comme le cercle vert derrière lui) ----------
    <span class="lavis lavis-azur" style="top:..;left:..;width:..;height:.."></span> */
 .lavis {
     position: absolute;
     z-index: -1;
     border-radius: 47% 53% 58% 42% / 51% 44% 56% 49%;
-    opacity: 0.55;
-    filter: url(#aquarelle) blur(10px);
+    opacity: 0.85;
     pointer-events: none;
 }
-.lavis-azur      { background: radial-gradient(closest-side, #A9D2E6, transparent 92%); }
-.lavis-sauge     { background: radial-gradient(closest-side, #B5C9A8, transparent 92%); }
-.lavis-framboise { background: radial-gradient(closest-side, #E9A9BC, transparent 92%); }
-.lavis-roux      { background: radial-gradient(closest-side, #F0C9A2, transparent 92%); }
-:root[data-theme="dark"] .lavis { opacity: 0.28; }
+.lavis-azur      { background: #CFE8F6; }
+.lavis-sauge     { background: #D6E4C0; }
+.lavis-framboise { background: #F2D3E4; }
+.lavis-roux      { background: #FFDDB0; }
+:root[data-theme="dark"] .lavis { opacity: 0.22; }
 
 /* ---------- Texte courant ---------- */
 .prose p { max-width: var(--mesure); }
 .prose p:last-child { margin-bottom: 0; }
 
-/* Première lettre en grand, comme dans un livre enluminé */
+/* Première lettre en grand, dessinée comme une initiale de conte */
 .lettrine > p:first-of-type::first-letter {
     float: left;
-    margin: 0.06em 0.12em 0 0;
+    margin: 0.04em 0.12em 0 0;
     font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-weight: 800;
     font-size: 3.7em;
     line-height: 0.82;
-    color: var(--framboise);
+    color: var(--roux);
+    -webkit-text-stroke: 2px var(--trait);
+    paint-order: stroke fill;
 }
 
 .chapeau {
@@ -40,42 +43,38 @@
     color: var(--encre-douce);
 }
 
-/* ---------- Boutons ---------- */
+/* ---------- Boutons : des autocollants qu'on enfonce ---------- */
 .bouton {
     display: inline-block;
     padding: 12px 26px;
-    border: 0;
+    border: var(--bord);
     border-radius: 999px;
-    background: var(--framboise);
-    color: #fff;
+    background: var(--roux);
+    color: #4A2B1E;
     font: inherit;
-    font-weight: 600;
-    font-size: 0.97rem;
+    font-weight: 800;
+    font-size: 0.99rem;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: var(--ombre);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 3px 4px 0 var(--trait);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
 }
-:root[data-theme="dark"] .bouton { color: #2A1620; }
-.bouton:hover { color: #fff; transform: translateY(-2px); box-shadow: var(--ombre-haute); }
-:root[data-theme="dark"] .bouton:hover { color: #2A1620; }
-.bouton-clair {
-    background: var(--creme);
-    color: var(--encre);
-    border: 1px solid var(--brume-profonde);
-}
-.bouton-clair:hover, :root[data-theme="dark"] .bouton-clair, :root[data-theme="dark"] .bouton-clair:hover { color: var(--framboise); }
-.bouton-petit { padding: 7px 16px; font-size: 0.9rem; }
+.bouton:hover { color: #4A2B1E; background: var(--miel); transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 5px 6px 0 var(--trait); }
+.bouton:active { transform: translate(3px, 4px); box-shadow: 0 0 0 var(--trait); }
+.bouton-clair { background: var(--creme); color: var(--encre); }
+.bouton-clair:hover { background: var(--azur-pale); color: var(--encre); }
+.bouton-petit { padding: 7px 16px; font-size: 0.9rem; box-shadow: 2px 3px 0 var(--trait); }
 button.bouton:disabled { opacity: 0.55; cursor: default; transform: none; }
 
 /* ---------- Pastilles ---------- */
 .pastilles { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .pastille {
     display: inline-block;
-    padding: 2px 12px;
+    padding: 1px 12px;
+    border: 2px solid color-mix(in srgb, var(--trait) 60%, transparent);
     border-radius: 999px;
     font-size: 0.88rem;
-    font-weight: 600;
+    font-weight: 700;
     background: var(--azur-pale);
     color: var(--azur-profond);
 }
@@ -89,7 +88,7 @@ button.bouton:disabled { opacity: 0.55; cursor: default; transform: none; }
     position: relative;
     padding: 28px 30px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-l);
     box-shadow: var(--ombre);
 }
@@ -116,12 +115,12 @@ button.bouton:disabled { opacity: 0.55; cursor: default; transform: none; }
 .accordeons { display: grid; gap: 12px; }
 details.accordeon {
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-m);
     box-shadow: var(--ombre);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-details.accordeon:hover { border-color: var(--sauge); }
+details.accordeon:hover { transform: translate(-1px, -1px); }
 details.accordeon[open] { box-shadow: var(--ombre-haute); }
 details.accordeon > summary {
     list-style: none;
@@ -130,7 +129,7 @@ details.accordeon > summary {
     position: relative;
     font-family: var(--serif);
     font-size: 1.12rem;
-    font-weight: 500;
+    font-weight: 650;
 }
 details.accordeon > summary::-webkit-details-marker { display: none; }
 details.accordeon > summary::after {
@@ -165,7 +164,7 @@ details.accordeon > summary:hover { color: var(--framboise); }
     color: var(--azur-profond);
     font-family: var(--serif);
     font-size: 1.6rem;
-    box-shadow: 0 0 0 3px var(--creme), 0 0 0 4px var(--sauge);
+    box-shadow: 0 0 0 3px var(--creme), 0 0 0 5.5px var(--trait);
 }
 .avatar::before { content: attr(data-initiale); }
 .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -180,9 +179,9 @@ details.accordeon > summary:hover { color: var(--framboise); }
 
 /* ---------- Compteur de vies (points) ---------- */
 .points-vies { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.point-vie { width: 16px; height: 16px; border-radius: 50%; }
-.point-vie.plein { background: var(--azur); box-shadow: 0 0 0 3px var(--azur-pale), 0 0 12px var(--azur); }
-.point-vie.vide  { border: 2px dashed var(--encre-douce); opacity: 0.55; }
+.point-vie { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--trait); }
+.point-vie.plein { background: var(--azur); box-shadow: 1px 2px 0 var(--trait); }
+.point-vie.vide  { border: 2px dashed var(--encre-douce); opacity: 0.6; }
 .points-legende { margin: 10px 0 0; font-family: var(--serif); font-style: italic; color: var(--encre-douce); }
 
 /* ---------- Jauge de caractéristique ---------- */
@@ -191,12 +190,12 @@ details.accordeon > summary:hover { color: var(--framboise); }
 .jauge-piste { display: flex; gap: 5px; }
 .jauge-piste i {
     flex: 1;
-    height: 10px;
+    height: 12px;
     border-radius: 999px;
     background: var(--creme-ombre);
-    border: 1px solid var(--brume-profonde);
+    border: 2px solid var(--trait);
 }
-.jauge-piste i.plein { background: linear-gradient(90deg, var(--roux), var(--framboise)); border-color: transparent; }
+.jauge-piste i.plein { background: var(--roux); }
 
 /* ---------- Séparateur : une liane qui ondule ---------- */
 .liane {
@@ -219,7 +218,7 @@ details.accordeon > summary:hover { color: var(--framboise); }
     gap: 18px;
     width: 100%;
     padding: 20px 22px;
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-l);
     background: var(--creme);
     box-shadow: var(--ombre);
@@ -245,12 +244,12 @@ details.accordeon > summary:hover { color: var(--framboise); }
     width: min(94vw, 720px);
     max-height: 90vh;
     padding: 0;
-    border: 0;
+    border: var(--bord);
     border-radius: var(--rayon-l);
     background: var(--creme);
     color: var(--encre);
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    box-shadow: 8px 10px 0 rgba(74, 43, 30, 0.45), 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 .fiche-relation::backdrop { background: rgba(14, 24, 33, 0.78); backdrop-filter: blur(4px); }
 .fiche-relation[open] { display: flex; flex-direction: column; animation: onglet-entree 0.35s cubic-bezier(0.2, 0.7, 0.2, 1); }
@@ -275,7 +274,7 @@ details.accordeon > summary:hover { color: var(--framboise); }
 .fr-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0; }
 .fr-corps { overflow-y: auto; padding: 24px 30px 34px; overscroll-behavior: contain; }
 
-.courbe { margin: 0 0 26px; padding: 14px 16px 10px; border-radius: var(--rayon-m); background: var(--brume); border: 1px solid var(--brume-profonde); }
+.courbe { margin: 0 0 26px; padding: 14px 16px 10px; border-radius: var(--rayon-m); background: var(--brume); border: var(--bord); }
 .courbe svg { display: block; width: 100%; height: auto; overflow: visible; }
 .courbe .zero { stroke: var(--brume-profonde); stroke-width: 1.5; stroke-dasharray: 5 5; }
 .courbe .trace { fill: none; stroke: var(--mousse); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
@@ -304,53 +303,71 @@ details.accordeon > summary:hover { color: var(--framboise); }
 
 .vide { color: var(--encre-douce); font-style: italic; }
 
-/* ---------- La charte gravée dans l'écorce ---------- */
+/* ---------- La charte : des plaquettes de papier clouées sur une planche de bois ---------- */
 .ecorce {
     position: relative;
-    padding: clamp(24px, 4vw, 52px);
-    border-radius: 40px;
-    color: #F2E8D5;
+    padding: clamp(22px, 4vw, 48px);
+    border: var(--bord);
+    border-radius: var(--rayon-l);
     background:
-        radial-gradient(70% 90% at 15% 0%, rgba(217, 128, 62, 0.22), transparent 60%),
-        radial-gradient(60% 80% at 90% 100%, rgba(178, 58, 92, 0.2), transparent 60%),
-        repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.0) 0 14px, rgba(0, 0, 0, 0.1) 14px 16px, rgba(255, 255, 255, 0.025) 16px 19px),
-        linear-gradient(160deg, #4F3E2D, #33271C);
-    box-shadow: var(--ombre-haute), inset 0 2px 0 rgba(255, 255, 255, 0.08);
+        repeating-linear-gradient(90deg, rgba(122, 74, 43, 0) 0 22px, rgba(122, 74, 43, 0.12) 22px 24px, rgba(255, 255, 255, 0.06) 24px 27px),
+        linear-gradient(160deg, #D9A064, #C48A52);
+    box-shadow: var(--ombre-haute);
+}
+:root[data-theme="dark"] .ecorce {
+    background:
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0 22px, rgba(0, 0, 0, 0.2) 22px 24px, rgba(255, 255, 255, 0.03) 24px 27px),
+        linear-gradient(160deg, #6A4B35, #563B29);
 }
 .articles {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 26px 22px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 .article {
     position: relative;
-    padding: 26px 24px 24px;
-    border-radius: 24px;
-    background: rgba(20, 12, 6, 0.28);
-    border: 1px solid rgba(255, 233, 200, 0.12);
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 28px 24px 24px;
+    border: var(--bord);
+    border-radius: var(--rayon-m);
+    background: var(--creme);
+    box-shadow: 3px 4px 0 rgba(74, 43, 30, 0.45);
+    transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
 }
-.article:hover { transform: translateY(-4px); background: rgba(20, 12, 6, 0.4); }
+.article:nth-child(odd)  { rotate: -1deg; }
+.article:nth-child(even) { rotate: 1deg; }
+.article::before {                          /* le clou */
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--trait);
+    border-radius: 50%;
+    background: var(--miel);
+}
+.article:hover { rotate: 0deg; transform: translateY(-5px); }
 .article-num {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-family: var(--serif);
-    font-size: 2.6rem;
-    font-weight: 300;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 2.7rem;
+    font-weight: 800;
     line-height: 1;
-    color: #F0B98A;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 0 22px rgba(240, 185, 138, 0.35);
+    color: var(--roux);
+    -webkit-text-stroke: 2px var(--trait);
+    paint-order: stroke fill;
 }
-.article h3 { color: #FFF6E4; font-size: 1.22rem; margin-bottom: 4px; }
-.article-sous { margin: 0 0 10px; font-family: var(--main); font-size: 1.25rem; line-height: 1.1; color: #F0B98A; }
-.article p:last-child { margin: 0; font-size: 0.97rem; line-height: 1.65; color: #E8DCC6; }
+.article h3 { font-size: 1.22rem; margin-bottom: 4px; }
+.article-sous { margin: 0 0 10px; font-family: var(--main); font-size: 1.35rem; font-weight: 700; line-height: 1.1; color: var(--framboise); }
+.article p:last-child { margin: 0; font-size: 0.97rem; line-height: 1.65; color: var(--encre-douce); }
 
 @media (max-width: 980px) { .articles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .articles { grid-template-columns: 1fr; } .ecorce { border-radius: 28px; } }
+@media (max-width: 620px) { .articles { grid-template-columns: 1fr; } }
 
 
 /* ---------- Pas de lettre d'initiale derrière une photo (transparence) ---------- */

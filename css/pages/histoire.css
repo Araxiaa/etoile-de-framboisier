@@ -40,7 +40,8 @@
     translate: -50% 0;
     border-radius: 50%;
     background: var(--framboise);
-    box-shadow: 0 0 0 5px var(--brume), 0 0 0 7px var(--framboise-pale), 0 0 18px var(--framboise);
+    border: 3px solid var(--trait);
+    box-shadow: 2px 3px 0 var(--trait);
 }
 .periode-lune { display: block; margin-bottom: 4px; font-family: var(--main); font-size: 1.6rem; line-height: 1; color: var(--framboise); }
 .periode-carte h3 { font-size: 1.5rem; margin-bottom: 12px; }
@@ -58,7 +59,7 @@
 .periode:nth-child(even) .periode-carte::after { left: -28px; }
 
 .periode.a-venir .periode-carte { background: transparent; border-style: dashed; box-shadow: none; }
-.periode.a-venir .periode-noeud { background: var(--creme); box-shadow: 0 0 0 5px var(--brume), 0 0 0 7px var(--brume-profonde); }
+.periode.a-venir .periode-noeud { background: var(--creme); border-style: dashed; box-shadow: none; }
 .periode.a-venir h3, .periode.a-venir p { color: var(--encre-douce); }
 
 @media (max-width: 800px) {
@@ -95,7 +96,7 @@
     gap: 12px;
     padding: 24px 26px;
     background: var(--creme);
-    border: 1px solid var(--brume-profonde);
+    border: var(--bord);
     border-radius: var(--rayon-l);
     box-shadow: var(--ombre);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -108,3 +109,21 @@
 .sujet h3 a:hover { color: var(--framboise); }
 .sujet-resume { margin: 0; font-size: 0.98rem; color: var(--encre-douce); }
 .sujet .pastilles { margin-top: auto; }
+
+/* Petits dessins dans les creux de la frise */
+.periode::after {
+    content: "";
+    position: absolute;
+    top: 34px;
+    width: 84px;
+    height: 84px;
+    background: center / contain no-repeat url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><g fill='%23F0B568' stroke='%237A4A2B' stroke-width='2' stroke-linejoin='round'><path d='M24 24c-7 0-12 7-12 12 0 5 4 7 8 6 3-1 5-1 8 0 4 1 8-1 8-6 0-5-5-12-12-12z'/><ellipse cx='11' cy='21' rx='4.2' ry='5.4' transform='rotate(-18 11 21)'/><ellipse cx='19.5' cy='11.5' rx='4.4' ry='5.8'/><ellipse cx='29' cy='11.5' rx='4.4' ry='5.8'/><ellipse cx='37.5' cy='21' rx='4.2' ry='5.4' transform='rotate(18 37.5 21)'/></g></svg>");
+    opacity: 0.9;
+    rotate: 14deg;
+}
+.periode:nth-child(odd)::after  { right: 14%; }
+.periode:nth-child(even)::after { left: 14%; rotate: -12deg; }
+.periode:nth-child(3n+2)::after { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><g fill='%23C07AAE' stroke='%237A4A2B' stroke-width='1.8'><ellipse cx='24' cy='13' rx='7.5' ry='11' transform='rotate(0 24 24)'/><ellipse cx='24' cy='13' rx='7.5' ry='11' transform='rotate(72 24 24)'/><ellipse cx='24' cy='13' rx='7.5' ry='11' transform='rotate(144 24 24)'/><ellipse cx='24' cy='13' rx='7.5' ry='11' transform='rotate(216 24 24)'/><ellipse cx='24' cy='13' rx='7.5' ry='11' transform='rotate(288 24 24)'/></g><circle cx='24' cy='24' r='5.2' fill='%23F0C27B' stroke='%237A4A2B' stroke-width='1.6'/></svg>"); }
+.periode:nth-child(3n)::after   { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 3C26 16 32 22 45 24 32 26 26 32 24 45 22 32 16 26 3 24 16 22 22 16 24 3z' fill='%23F7CF7F' stroke='%237A4A2B' stroke-width='2.2' stroke-linejoin='round'/></svg>"); width: 64px; height: 64px; }
+.periode.a-venir::after { opacity: 0.4; }
+@media (max-width: 800px) { .periode::after { display: none; } }
