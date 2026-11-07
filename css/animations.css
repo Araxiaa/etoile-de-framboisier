@@ -1,25 +1,16 @@
 /* ==========================================================================
-   ANIMATIONS — tout ce qui bouge sur le site.
-   Chargé automatiquement par js/site.js. Pour tout couper : retirer le bloc
-   « Animations » à la fin de js/site.js.
+   ANIMATIONS — douces, comme lui. Chargé par js/site.js.
+   Pour tout couper : retirer le bloc « Animations » à la fin de js/site.js.
    Les personnes qui ont réglé leur appareil sur « réduire les animations »
-   voient un site immobile (voir la fin du fichier et css/base.css).
+   voient un site immobile.
    ========================================================================== */
 
-/* ---------- 1. Passage d'une page à l'autre ---------- */
 @view-transition { navigation: auto; }
 .site-header { view-transition-name: entete; }
-::view-transition-old(root),
-::view-transition-new(root) { animation-duration: 0.35s; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
 
-/* ---------- 2. Pétales de freesia et lucioles (créés par js/animations.js) ---------- */
-.ambiance {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-}
+/* ---------- Pétales de freesia (jour) et lucioles (nuit) ---------- */
+.ambiance { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
 .petale {
     position: absolute;
     top: -30px;
@@ -33,104 +24,25 @@
 }
 @keyframes chute {
     0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
-    8%   { opacity: 0.8; }
+    8%   { opacity: 0.75; }
     35%  { transform: translate3d(40px, 36vh, 0) rotate(120deg); }
     65%  { transform: translate3d(-30px, 70vh, 0) rotate(250deg); }
-    92%  { opacity: 0.8; }
+    92%  { opacity: 0.75; }
     100% { transform: translate3d(34px, 108vh, 0) rotate(380deg); opacity: 0; }
 }
-.luciole {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FFE9A8;
-    box-shadow: 0 0 10px 3px rgba(255, 226, 140, 0.7);
-    opacity: 0;
-    display: none;
-    animation: luciole var(--d) ease-in-out var(--delai) infinite;
-}
+.luciole { position: absolute; left: var(--x); top: var(--y); width: 6px; height: 6px; border-radius: 50%; background: #FFE9A8; box-shadow: 0 0 10px 3px rgba(255, 226, 140, 0.7); opacity: 0; display: none; animation: luciole var(--d) ease-in-out var(--delai) infinite; }
 :root[data-theme="dark"] .luciole { display: block; }
 :root[data-theme="dark"] .petale { display: none; }
-@keyframes luciole {
-    0%, 100% { opacity: 0; transform: translate(0, 0); }
-    20%, 60% { opacity: 0.95; }
-    50%      { transform: translate(40px, -30px); }
-    80%      { opacity: 0.1; transform: translate(-20px, 20px); }
-}
+@keyframes luciole { 0%, 100% { opacity: 0; transform: translate(0, 0); } 20%, 60% { opacity: 0.95; } 50% { transform: translate(40px, -30px); } 80% { opacity: 0.1; transform: translate(-20px, 20px); } }
 
-/* ---------- 3. Les branches se balancent doucement ---------- */
-.tete-page::after, .hero-branche { animation: balancement 11s ease-in-out infinite alternate; }
-@keyframes balancement {
-    from { rotate: -1.6deg; }
-    to   { rotate: 1.8deg; }
-}
-
-/* ---------- 4. Accueil : entrée en scène ---------- */
-.hero-texte > * { animation: apparition 1s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
-.hero-texte > :nth-child(1) { animation-delay: 0.1s; }
-.hero-texte > :nth-child(2) { animation-delay: 0.3s; }
-.hero-texte > :nth-child(3) { animation-delay: 0.5s; }
-.hero-texte > :nth-child(4) { animation-delay: 0.7s; }
-.hero-texte > :nth-child(5) { animation-delay: 0.9s; }
-.hero-portrait { animation: apparition-portrait 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s backwards; }
-@keyframes apparition { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes apparition-portrait { from { opacity: 0; transform: scale(0.92) rotate(-2deg); } to { opacity: 1; transform: none; } }
-
-.point-vie { animation: point-vie 0.55s cubic-bezier(0.3, 1.6, 0.5, 1) calc(0.3s + var(--i, 0) * 0.09s) backwards; }
-.hero .point-vie { animation-delay: calc(1.1s + var(--i, 0) * 0.09s); }
-.point-vie:nth-child(1) { --i: 0; } .point-vie:nth-child(2) { --i: 1; } .point-vie:nth-child(3) { --i: 2; }
-.point-vie:nth-child(4) { --i: 3; } .point-vie:nth-child(5) { --i: 4; } .point-vie:nth-child(6) { --i: 5; }
-.point-vie:nth-child(7) { --i: 6; } .point-vie:nth-child(8) { --i: 7; } .point-vie:nth-child(9) { --i: 8; }
-@keyframes point-vie { from { opacity: 0; transform: scale(0.2); } }
-
-/* Son visage flotte doucement ; les petits dessins gigotent comme un dessin animé image par image */
-.portrait-cadre { animation: flotte-portrait 6.5s ease-in-out infinite; }
-@keyframes flotte-portrait {
-    0%, 100% { transform: rotate(-2.5deg) translateY(0); }
-    50%      { transform: rotate(0.5deg) translateY(-10px); }
-}
-.doodle { animation: gigote 1.1s steps(1, end) infinite; }
-.doodle:nth-of-type(2n) { animation-duration: 1.4s; animation-delay: -0.4s; }
-.doodle:nth-of-type(3n) { animation-duration: 0.9s; animation-delay: -0.7s; }
-@keyframes gigote {
-    0%   { rotate: -4deg; scale: 1; }
-    33%  { rotate: 3deg; scale: 1.05; }
-    66%  { rotate: -1deg; scale: 0.97; }
-}
-.d-nuage { animation: derive-nuage 14s ease-in-out infinite alternate !important; }
-@keyframes derive-nuage { to { translate: 40px 6px; } }
-
-/* ---------- 5. Apparition au défilement (js/animations.js ajoute les classes) ---------- */
-.a-reveler {
-    opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
+/* ---------- Apparition des sections au défilement ---------- */
+.a-reveler { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s var(--ease); }
 .a-reveler.vu { opacity: 1; transform: none; }
 
-/* ---------- 6. Survols ---------- */
-.sym-coeur, .sym-etoile { transform-origin: center; }
-.relation:hover .sym-coeur  { animation: battement 0.9s ease-in-out; }
-.relation:hover .sym-etoile { animation: scintille 1.1s ease-in-out; }
-@keyframes battement { 0%, 100% { scale: 1; } 25% { scale: 1.28; } 50% { scale: 1; } 70% { scale: 1.16; } }
-@keyframes scintille { 50% { scale: 1.3; rotate: 24deg; } }
+/* ---------- La branche se balance doucement ---------- */
+.entete-page::after { animation: balancement 12s ease-in-out infinite alternate; }
+@keyframes balancement { from { rotate: -1.5deg; } to { rotate: 1.8deg; } }
 
-.portrait-cadre img { transition: transform 0.6s ease-out; }
-.oeuvre img { transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.oeuvre a:hover img, .oeuvre a:focus-visible img { transform: scale(1.05); }
-
-details.accordeon { interpolate-size: allow-keywords; }
-details.accordeon::details-content {
-    block-size: 0;
-    overflow: hidden;
-    transition: block-size 0.3s ease, content-visibility 0.3s allow-discrete;
-}
-details.accordeon[open]::details-content { block-size: auto; }
-
-/* ---------- Animations réduites : le site reste immobile ---------- */
 @media (prefers-reduced-motion: reduce) {
     .ambiance { display: none; }
     .a-reveler { opacity: 1; transform: none; }

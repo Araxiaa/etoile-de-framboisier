@@ -5,29 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard — Étoile de Framboisier</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#F5EFDF">
+    <meta name="theme-color" content="#FBF5EA">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,100;1,9..144,300..800,100&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Caveat:wght@500;700&display=swap">
     <script src="js/theme.js"></script>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/texte.css">
+    <link rel="stylesheet" href="css/composants.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body>
+<body class="admin">
 
     <header class="admin-barre">
-        <a class="marque" href="index.html">← Retour au site</a>
+        <a class="admin-retour" href="index.html">← Retour au site</a>
         <span class="admin-titre">Dashboard</span>
         <span class="admin-qui" id="qui"></span>
-        <button class="bouton-clair bouton-petit" id="deconnexion" type="button" hidden>Se déconnecter</button>
+        <button class="bouton bouton-clair bouton-petit" id="deconnexion" type="button" hidden>Se déconnecter</button>
     </header>
 
     <main class="admin-contenu">
 
         <!-- Écran : chargement / connexion / refus -->
-        <section class="admin-ecran panneau" id="ecran">
+        <section class="admin-ecran carte" id="ecran">
             <p>Chargement…</p>
         </section>
 
@@ -54,12 +55,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.min.js"></script>
     <script src="js/config.js"></script>
     <script src="js/outils.js"></script>
+    <script src="js/riche.js"></script>
+    <script src="js/editeur.js"></script>
+    <script src="js/data/pages.js"></script>
+    <script src="js/data/accueil.js"></script>
+    <script src="js/data/charte.js"></script>
+    <script src="js/data/fiche-physique.js"></script>
+    <script src="js/data/vies.js"></script>
     <script src="js/data/relations.js"></script>
     <script src="js/data/lignee.js"></script>
-    <script src="js/data/vies.js"></script>
     <script src="js/data/journal.js"></script>
     <script src="js/data/galerie.js"></script>
-    <script src="js/data/textes.js"></script>
     <script src="js/data/lunes.js"></script>
     <script src="js/data/diplomatie.js"></script>
     <script src="js/data/actions.js"></script>

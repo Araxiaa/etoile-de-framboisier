@@ -1,27 +1,28 @@
 /* ==========================================================================
-   ACTIONS — ce qu'il a fait pour le Clan du Tonnerre.
-   Normalement modifié depuis le dashboard (admin.html) ; ce fichier sert de
-   valeurs de départ et de sauvegarde si la base est injoignable.
-   lune (facultatif), titre, texte
+   ACTIONS
+   Copie de secours de la base (sauvegarde du 7 novembre 2026). Le site lit d’abord la base en ligne
+   (dashboard) ; ce fichier ne sert que si elle est injoignable.
+
    ========================================================================== */
 window.ACTIONS = [
-    {
-        "lune": "15 lunes",
-        "titre": "Il prend la tête du clan",
-        "texte": "Propulsé à la tête du Clan du Tonnerre sous le nom d’Étoile de Framboisier, il dissimule son anxiété derrière un masque hautain pour asseoir sa légitimité face aux anciens."
-    },
-    {
-        "lune": "20 lunes",
-        "titre": "La charte de l’Écorce de la Concorde",
-        "texte": "Il officialise sa charte pacifique pour offrir à sa forêt et à ses jeunes chatons un avenir serein, loin des guerres incessantes."
-    },
-    {
-        "lune": "22 lunes",
-        "titre": "Deux nouveaux guerriers",
-        "texte": "Il baptise Veille de Nénuphar et Piquée du Cormoran, et le Clan du Tonnerre est en fête."
-    },
-    {
-        "titre": "Un clan qui accueille",
-        "texte": "Il recueille Petit Galopin, découvert abandonné à la lisière du territoire, puis Petit Courlis : il leur offre un foyer au cœur du clan, fidèle à la loi du Sanctuaire des Égarés."
-    }
+  {
+    "lune": "15 lunes",
+    "texte": "Choisi par le clan des étoiles, Etoile de Framboisier prit la direction du clan, comme le veut la volonté des aïeux. Il désigna sa sœur, Ombre de Myrtille, comme lieutenante, pour l'aider à gérer le clan.\n\nLes deux adelphes eurent d'abord pour priorité d'assurer une bonne cohabitation au sein du clan : laisser les anciens membres de la Rivière vaquer à leurs occupations et prendre part librement, comme tout membre du clan, aux tâches et aux patrouilles.",
+    "titre": "Il prend la tête du clan"
+  },
+  {
+    "lune": "18 lunes",
+    "texte": "Après la mort de sa sœur, il choisit d'établir une charte au sein du clan, pour que celui-ci respecte les règles d'un chef pacifique. C'est aussi à cette occasion qu'il prit comme lieutenante Clapotis d'Etang, une ancienne Rivière qui se trouve être une amie très proche de lui.",
+    "titre": "La charte de l’Écorce de la Concorde"
+  },
+  {
+    "lune": "20 lunes",
+    "texte": "Une patrouille du clan revient avec une bonne nouvelle : deux portées de chatons ont été retrouvées à la frontière. Aucune odeur distinctive des clans, ce qui laisse penser à des portées de solitaire. Malheureusement, des chatons sont morts de froid avant l'arrivée d'une patrouille, et quatre chatons ont ainsi rejoint le clan :\n\nDeux chatons ont été confiés à Chasseuse de Bulle, deux autres ont été adoptés par Etoile de Framboisier.\n\nLe meneur souhaite faire comprendre que le clan ne se limite pas aux frontières et que tout le monde y est accepté.",
+    "titre": "Cadeaux du ciel ?"
+  },
+  {
+    "lune": "24 lunes",
+    "texte": "Comme le clan s'agrandit à vue d'œil, le meneur et sa lieutenante choisissent de créer un rang supplémentaire pour les épauler. Ce sont les Conseillers et Conseillères, des félins qui recevront directement les ordres de Clapotis d'Etang et d'Etoile de Framboisier, et qui devront incarner l'unification du clan.\n\nMentors des guerriers, ces conseillers auront pour mission de mettre en place des entraînements de nage et d'escalade, car unir le clan est essentiel aux yeux des deux dirigeants. Il leur faudra également organiser des patrouilles lorsque le besoin s'en fait sentir et veiller à ce que chaque membre ne manque de rien.\n\nAux côtés du chef, du guérisseur et de la lieutenante, ils constitueront un conseil chargé de prendre les meilleures décisions pour le clan. On les reconnaît à quatre plumes rassemblées derrière l'une de leurs oreilles : ce sont désormais des chats importants du clan.",
+    "titre": "Conseillers et Conseillères"
+  }
 ];

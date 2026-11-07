@@ -1,96 +1,193 @@
 /* ==========================================================================
-   LIGNÉE — l'arbre généalogique.
-   Pour ajouter un chat : copier une ligne { nom: ... } dans le bon groupe.
+   LIGNEE
+   Copie de secours de la base (sauvegarde du 7 novembre 2026). Le site lit d’abord la base en ligne
+   (dashboard) ; ce fichier ne sert que si elle est injoignable.
 
-   Champs d'un chat :
-     nom        (obligatoire)
-     role       ex. "Grand-mère", "Frère"
-     statut     'vivant' | 'vivant-pj' | 'decede' | 'disparu' | 'vide' | 'heros'
-     etiquette  texte de la pastille (ex. "Vivante", "Décédé")
-     joueur     ex. "@Oriyakii" ou "PNJ"
-     photo      nom du fichier dans assets/photos/  (facultatif)
-     tag        petite pastille en plus (ex. "Highlander")  (facultatif)
    ========================================================================== */
 window.LIGNEE = {
-
-    origine: '75 % Clan du Tonnerre / 25 % domestique (origines Highlander via Rosie)',
-
-    generations: [
+  "origine": "75 % Clan du Tonnerre / 25 % domestique (origines Highlander via Rosie)",
+  "generations": [
+    {
+      "titre": "Les aïeux",
+      "groupes": [
         {
-            titre: 'Les aïeux',
-            groupes: [
-                {
-                    titre: 'Branche paternelle',
-                    membres: [
-                        { nom: 'Longue Liane (Anciennement : Rosie)', role: 'Grand-mère', statut: 'disparu', etiquette: 'Disparue', joueur: 'PNJ', photo: 'Rosie.png', tag: 'Highlander' },
-                        { nom: 'Queue de Souris', role: 'Grand-père', statut: 'decede', etiquette: 'Décédé', joueur: 'PNJ', photo: 'Queue de Souris.png' }
-                    ]
-                }
-            ]
-        },
-        {
-            titre: 'Parents',
-            groupes: [
-                {
-                    titre: 'Ses parents',
-                    couple: true,
-                    membres: [
-                        { nom: 'Douce Sève', role: 'Mère biologique', statut: 'vivant', etiquette: 'Vivante', joueur: 'PNJ', photo: 'Douce Sève - PNJ.png' },
-                        { nom: 'Racine de Bouleau', role: 'Père biologique', statut: 'vivant', etiquette: 'Vivant', joueur: 'PNJ', photo: 'Racine de Bouleau - PNJ.png' }
-                    ]
-                },
-            ]
-        },
-        {
-            titre: 'Sa génération',
-            groupes: [
-                {
-                    titre: 'La portée',
-                    membres: [
-                        { nom: 'Épine de Fraisier', role: 'Frère', statut: 'decede', etiquette: 'Décédé', photo: 'Epine de Fraisier - PNJ.png' },
-                        { nom: 'Ombre de Myrtille', role: 'Sœur', statut: 'decede', etiquette: 'Décédée', photo: 'Ombre de Myrtille - PNJ.png' },
-                        { nom: 'Nuage de Mûre', role: 'Sœur', statut: 'decede', etiquette: 'Décédée', photo: 'Nuage de Mûre.png' },
-                        { nom: 'Étoile de Framboisier', role: 'Meneur du Tonnerre', statut: 'heros', etiquette: 'Meneur', photo: 'Headshot Etoile de Framboisier Oriyakii.webp' }
-                    ]
-                },
-                {
-                    titre: 'Par adoption',
-                    membres: [
-                        { nom: 'Veille de Nénuphar', role: 'Sœur adoptive', statut: 'vivant-pj', etiquette: 'Vivante', joueur: '@Une_Bretonne', photo: 'Nuage de Nénuphar.webp' },
-                        { nom: 'Piquée du Cormoran', role: 'Frère adoptif', statut: 'vivant', etiquette: 'Vivante', joueur: 'PNJ', photo: 'Piquée du Cormoran.png' }
-                    ]
-                },
-                {
-                    titre: 'Partenaire',
-                    membres: [
-                        { nom: 'Emplacement libre', role: 'Compagne / compagnon', statut: 'vide', etiquette: 'Inconnu', joueur: 'À voir en RP…' }
-                    ]
-                }
-            ]
-        },
-        {
-            titre: 'Ses enfants (liens du cœur)',
-            groupes: [
-                {
-                    titre: 'Fils adoptifs',
-                    membres: [
-                        { nom: 'Petit Galopin', role: 'Fils adoptif', statut: 'decede', etiquette: 'Mort', joueur: '@Oriyakii', photo: 'Petit Galopin - Oriyakii.webp' },
-                        { nom: 'Petit Courlis', role: 'Fils adoptif', statut: 'decede', etiquette: 'Mort', joueur: '@_.velyxia', photo: 'Petit Courlis.png' },
-                        { nom: 'Petite Oie', role: 'Fille adoptive', statut: 'vivant-pj', etiquette: 'vivante', joueur: '@plumeau_', photo: 'Petite Oie.png' }
-                    ]
-                }
-            ]
-        },
-        {
-            titre: 'Les petits-enfants',
-            groupes: [
-                {
-                    titre: '',
-                    membres: [
-                        { nom: 'Aucun petit-chaton', role: 'Petits-enfants', statut: 'vide', etiquette: 'Verrouillé', joueur: 'Futur lointain' }
-                    ]
-                }
-            ]
+          "titre": "Branche paternelle",
+          "membres": [
+            {
+              "nom": "Longue Liane (Anciennement : Rosie)",
+              "tag": "Highlander",
+              "role": "Grand-mère",
+              "photo": "Rosie.png",
+              "joueur": "PNJ",
+              "statut": "disparu",
+              "etiquette": "Disparue"
+            },
+            {
+              "nom": "Queue de Souris",
+              "role": "Grand-père",
+              "photo": "Queue de Souris.png",
+              "joueur": "PNJ",
+              "statut": "decede",
+              "etiquette": "Décédé"
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "titre": "Parents",
+      "groupes": [
+        {
+          "titre": "Ses parents",
+          "couple": true,
+          "membres": [
+            {
+              "nom": "Douce Sève",
+              "role": "Mère biologique",
+              "photo": "Douce Sève - PNJ.png",
+              "joueur": "PNJ",
+              "statut": "vivant",
+              "etiquette": "Vivante"
+            },
+            {
+              "nom": "Racine de Bouleau",
+              "role": "Père biologique",
+              "photo": "Racine de Bouleau - PNJ.png",
+              "joueur": "PNJ",
+              "statut": "vivant",
+              "etiquette": "Vivant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "titre": "Sa génération",
+      "groupes": [
+        {
+          "titre": "La portée",
+          "membres": [
+            {
+              "nom": "Épine de Fraisier",
+              "role": "Frère",
+              "photo": "Epine de Fraisier - PNJ.png",
+              "statut": "decede",
+              "etiquette": "Décédé"
+            },
+            {
+              "nom": "Ombre de Myrtille",
+              "role": "Sœur",
+              "photo": "Ombre de Myrtille - PNJ.png",
+              "statut": "decede",
+              "etiquette": "Décédée"
+            },
+            {
+              "nom": "Nuage de Mûre",
+              "role": "Sœur",
+              "photo": "Nuage de Mûre.png",
+              "statut": "decede",
+              "etiquette": "Décédée"
+            },
+            {
+              "nom": "Étoile de Framboisier",
+              "role": "Meneur du Tonnerre",
+              "photo": "Headshot Etoile de Framboisier Oriyakii.webp",
+              "statut": "heros",
+              "etiquette": "Meneur"
+            }
+          ]
+        },
+        {
+          "titre": "Par adoption",
+          "membres": [
+            {
+              "nom": "Veille de Nénuphar",
+              "role": "Sœur adoptive",
+              "photo": "Nuage de Nénuphar.webp",
+              "joueur": "@Une_Bretonne",
+              "statut": "vivant-pj",
+              "etiquette": "Vivante"
+            },
+            {
+              "nom": "Piquée du Cormoran",
+              "role": "Frère adoptif",
+              "photo": "Piquée du Cormoran.png",
+              "joueur": "PNJ",
+              "statut": "vivant",
+              "etiquette": "Vivante"
+            }
+          ]
+        },
+        {
+          "titre": "Partenaire",
+          "membres": [
+            {
+              "nom": "Emplacement libre",
+              "role": "Compagne / compagnon",
+              "joueur": "À voir en RP…",
+              "statut": "vide",
+              "etiquette": "Inconnu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "titre": "Ses enfants (liens du cœur)",
+      "groupes": [
+        {
+          "titre": "Enfants adoptifs",
+          "membres": [
+            {
+              "nom": "Petit Galopin",
+              "role": "Fils adoptif",
+              "photo": "Petit Galopin - Oriyakii.webp",
+              "joueur": "@Oriyakii",
+              "statut": "decede",
+              "etiquette": "Mort"
+            },
+            {
+              "nom": "Petit Courlis",
+              "role": "Fils adoptif",
+              "photo": "Petit Courlis.png",
+              "joueur": "@_.velyxia",
+              "statut": "decede",
+              "etiquette": "Mort"
+            },
+            {
+              "nom": "Petite Oie",
+              "role": "Fille adoptive",
+              "photo": "Petite Oie.png",
+              "joueur": "@plumeau_",
+              "statut": "vivant-pj",
+              "etiquette": "vivante"
+            },
+            {
+              "nom": "Petit Cygne",
+              "role": "Fils Adoptif",
+              "joueur": "@Néo",
+              "statut": "vivant-pj"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "titre": "Les petits-enfants",
+      "groupes": [
+        {
+          "titre": "",
+          "membres": [
+            {
+              "nom": "Aucun petit-chaton",
+              "role": "Petits-enfants",
+              "joueur": "Futur lointain",
+              "statut": "vide",
+              "etiquette": "Verrouillé"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };

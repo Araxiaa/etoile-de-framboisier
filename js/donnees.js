@@ -8,7 +8,8 @@
     'use strict';
 
     var C = window.SITE_CONFIG;
-    var CLES = { relations: 'RELATIONS', vies: 'VIES', journal: 'JOURNAL', galerie: 'GALERIE', lignee: 'LIGNEE', textes: 'TEXTES', lunes: 'LUNES', diplomatie: 'DIPLOMATIE', actions: 'ACTIONS', blessures: 'BLESSURES' };
+    var CLES = { relations: 'RELATIONS', vies: 'VIES', journal: 'JOURNAL', galerie: 'GALERIE', lignee: 'LIGNEE', lunes: 'LUNES', diplomatie: 'DIPLOMATIE', actions: 'ACTIONS', blessures: 'BLESSURES',
+                 accueil: 'ACCUEIL', charte: 'CHARTE', physique_fiche: 'FICHE_PHYSIQUE' };
     var attente = [];
     var fini = false;
 
@@ -33,7 +34,10 @@
         .then(function (r) { return r.ok ? r.json() : []; })
         .then(function (lignes) {
             lignes.forEach(function (l) {
-                if (CLES[l.cle] && l.valeur != null) window[CLES[l.cle]] = l.valeur;
+                if (l.valeur == null) return;
+                if (CLES[l.cle]) window[CLES[l.cle]] = l.valeur;
+                // les textes des pages : page par page, pour qu'une page absente de la base garde sa copie de secours
+                else if (l.cle === 'pages') window.PAGES_TEXTE = Object.assign({}, window.PAGES_TEXTE, l.valeur);
             });
         })
         .catch(function () { /* on garde js/data/*.js */ })
