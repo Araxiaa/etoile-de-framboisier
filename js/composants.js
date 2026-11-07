@@ -256,12 +256,10 @@
         var ev = [];
         var hist = ((window.PAGES_TEXTE || {}).histoire || { sections: [] }).sections;
         hist.forEach(function (s) {
-            (s.blocs || []).forEach(function (b, i, tab) {
-                if (b.t === 'titre' && b.surtitre && nombre(b.surtitre) != null) {
-                    var suite = tab[i + 1], txt = suite && suite.t === 'p' ? window.Riche.texteBrut(suite.html) : '';
-                    ev.push({ type: 'chapitre', lune: nombre(b.surtitre), label: b.surtitre, titre: b.texte, texte: txt.length > 170 ? txt.slice(0, txt.lastIndexOf(' ', 170)) + '…' : txt, href: '#histoire/chronique' });
-                }
-            });
+            if (/^chapitre/.test(s.id || '') && nombre(s.surtitre) != null) {
+                var p1 = (s.blocs || []).filter(function (b) { return b.t === 'p'; })[0], txt = p1 ? window.Riche.texteBrut(p1.html) : '';
+                ev.push({ type: 'chapitre', lune: nombre(s.surtitre), label: s.surtitre, titre: s.titre, texte: txt.length > 170 ? txt.slice(0, txt.lastIndexOf(' ', 170)) + '…' : txt, href: '#histoire/' + s.id });
+            }
         });
         (window.LUNES || []).forEach(function (s) { if (nombre(s.lune) != null) ev.push({ type: 'souvenir', lune: nombre(s.lune), label: s.lune, titre: s.titre, texte: s.texte, href: '#histoire/lunes' }); });
         (window.JOURNAL || []).forEach(function (f) { if (nombre(f.lune) != null) ev.push({ type: 'fil', lune: nombre(f.lune), label: f.lune, titre: f.titre, texte: f.resume, lien: f.lien && f.lien !== '#' ? f.lien : '' }); });

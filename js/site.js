@@ -43,13 +43,10 @@
     function slug(s, i) { return String(s.id || s.titre || 's' + i).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 's' + i; }
     function bati() {
         var T = window.PAGES_TEXTE || {};
+        if (T.histoire) window.Riche.migrerHistoire(T.histoire);
         arbre = PAGES.map(function (p) {
             var d = T[p[0]] || {}, secs = (d.sections || []).slice();
             if (p[0] === 'physique' && T.soins) secs = secs.concat(T.soins.sections || []);
-            if (p[0] === 'histoire') {
-                var i = secs.findIndex(function (s) { return s.id === 'chronique'; });
-                secs.splice(i + 1, 0, { id: 'parcours', titre: 'Le parcours', surtitre: 'Toute sa vie, d’un seul regard', composant: 'parcours', blocs: [] });
-            }
             secs = secs.filter(function (s) { return !s.masque && ((s.blocs && s.blocs.length) || (s.composant && window.Composants.existe(s.composant))); })
                 .map(function (s, i) { s = Object.assign({}, s); s.id = slug(s, i); return s; });
             return { id: p[0], nom: p[1], phrase: p[2], titre: d.titre || p[1], intro: d.intro || '', sections: secs };
@@ -202,7 +199,7 @@
             else { pageVue(p, s); sousNav(p, s); }
         }
         courant = id;
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'instant' });
         var b = document.getElementById('principal'); if (b) b.focus({ preventScroll: true });
         progression();
     }

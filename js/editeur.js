@@ -25,7 +25,7 @@
     }
 
     var TYPES = [
-        ['p', 'Paragraphe'], ['titre', 'Titre'], ['citation', 'Citation'], ['sep', 'Séparateur'],
+        ['p', 'Paragraphe'], ['titre', 'Titre'], ['soustitre', 'Sous-titre'], ['citation', 'Citation'], ['sep', 'Séparateur'],
         ['liste', 'Liste'], ['encadre', 'Encadré'], ['image', 'Image'], ['lien', 'Lien']
     ];
     var NOMS = {}; TYPES.forEach(function (t) { NOMS[t[0]] = t[1]; });
@@ -33,7 +33,8 @@
     function neuf(type) {
         switch (type) {
             case 'p': return { t: 'p', html: '' };
-            case 'titre': return { t: 'titre', niveau: 3, texte: '' };
+            case 'titre': return { t: 'titre', niveau: 2, texte: '' };
+            case 'soustitre': return { t: 'titre', niveau: 3, texte: '' };
             case 'citation': return { t: 'citation', html: '', auteur: '', style: 'grande' };
             case 'sep': return { t: 'sep', motif: 'etoile' };
             case 'liste': return { t: 'liste', items: [''], style: 'etoiles' };
@@ -112,7 +113,9 @@
         var barre = h('div', { class: 'editeur-barre', role: 'toolbar', 'aria-label': 'Mise en forme du texte' });
         var liste = h('div', { class: 'editeur-blocs' });
         var ajout = h('div', { class: 'editeur-ajout' });
-        racine.appendChild(barre); racine.appendChild(liste); racine.appendChild(ajout);
+        var haut = h('div', { class: 'editeur-haut' });
+        var outils = h('div', { class: 'editeur-outils' }, [haut, barre]);
+        racine.appendChild(outils); racine.appendChild(liste); racine.appendChild(ajout);
 
         function change() { if (onChange) onChange(); }
 
@@ -371,6 +374,18 @@
             if (!blocs.length) liste.appendChild(h('p', { class: 'eb-vide', text: 'Cette section est vide. Ajoute un premier bloc ci-dessous.' }));
         }
 
+        // barre du haut : ajoute un bloc juste après celui où l'on écrit (ou à la fin)
+        haut.appendChild(h('span', { class: 'eb-ajout-titre', text: 'Ajouter :' }));
+        TYPES.forEach(function (t) {
+            var b = h('button', { type: 'button', class: 'eb-ajouter', text: t[1] });
+            b.addEventListener('mousedown', function (ev) { ev.preventDefault(); });
+            b.addEventListener('click', function () {
+                var pos = blocs.length, c = editeur.cible && editeur.cible.closest ? editeur.cible.closest('.eb-bloc') : null;
+                if (c) pos = Array.prototype.indexOf.call(liste.children, c) + 1;
+                blocs.splice(pos, 0, neuf(t[0])); change(); rendre(pos, true);
+            });
+            haut.appendChild(b);
+        });
         ajout.appendChild(h('span', { class: 'eb-ajout-titre', text: 'Ajouter à la fin :' }));
         TYPES.forEach(function (t) {
             var b = h('button', { type: 'button', class: 'bouton bouton-clair bouton-petit', text: '+ ' + t[1] });

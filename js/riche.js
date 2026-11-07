@@ -129,5 +129,26 @@
 
     function blocs(liste) { return (liste || []).map(bloc).join(''); }
 
-    window.Riche = { html: blocs, bloc: bloc, nettoyer: nettoyer, texteBrut: texteBrut, esc: esc, MOTIFS: MOTIFS };
+    /* ---------- Histoire : « La chronique » d'un seul bloc -> un chapitre par section ----------
+       Les anciens textes (un grand texte coupé par des titres datés) sont découpés en chapitres.
+       Le « mur des lunes » est masqué (l'histoire = chapitres + fils de RP). Rien n'est perdu :
+       il suffit de le démasquer dans le dashboard. Retourne true si quelque chose a changé. */
+    function migrerHistoire(p) {
+        if (!p || !Array.isArray(p.sections)) return false;
+        var i = -1; p.sections.forEach(function (s, k) { if (s.id === 'chronique') i = k; });
+        if (i < 0) return false;
+        var blocs = p.sections[i].blocs || [], chap = [], cur = null;
+        var nb = blocs.filter(function (b) { return b.t === 'titre' && b.surtitre; }).length;
+        if (nb < 2) return false;
+        blocs.forEach(function (b) {
+            if (b.t === 'titre' && b.surtitre) { cur = { id: 'chapitre-' + (chap.length + 1), titre: b.texte, surtitre: b.surtitre, blocs: [] }; chap.push(cur); }
+            else if (cur) cur.blocs.push(b);
+        });
+        chap.forEach(function (c) { while (c.blocs.length && c.blocs[c.blocs.length - 1].t === 'sep') c.blocs.pop(); });
+        Array.prototype.splice.apply(p.sections, [i, 1].concat(chap));
+        p.sections.forEach(function (x) { if (x.id === 'lunes') x.masque = true; });
+        return true;
+    }
+
+    window.Riche = { html: blocs, bloc: bloc, nettoyer: nettoyer, texteBrut: texteBrut, esc: esc, MOTIFS: MOTIFS, migrerHistoire: migrerHistoire };
 })();

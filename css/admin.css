@@ -8,8 +8,53 @@
 .bouton-clair { background: transparent; }
 .bouton-petit { padding: 8px 16px; font-size: .64rem; }
 .bouton-ajout { border-style: dashed; }
-html { scroll-padding-top: 90px; }
-body.admin { line-height: 1.6; }
+
+/* Base du dashboard (il n'utilise plus la feuille du site) */
+*, *::before, *::after { box-sizing: border-box; }
+body.admin { margin: 0; font: 400 1rem/1.6 var(--corps); color: var(--encre); -webkit-font-smoothing: antialiased; }
+body.admin h1, body.admin h2, body.admin h3 { margin: 0; font-family: var(--titre); font-weight: 400; line-height: 1.15; }
+body.admin a { color: var(--azur); }
+body.admin button { font: inherit; }
+body.admin .bouton, body.admin .section-onglet { color: inherit; }
+.etiquette { font: 500 .72rem/1.3 var(--titre); letter-spacing: .2em; text-transform: uppercase; color: var(--doux); }
+body.admin .bouton { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border: 1px solid var(--encre); border-radius: 99px; background: var(--encre); color: var(--fond); font: 500 .74rem/1 var(--titre); letter-spacing: .18em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+body.admin .bouton:hover:not(:disabled) { background: var(--or); border-color: var(--or); color: var(--sur-or); }
+body.admin .bouton:disabled { opacity: .45; cursor: default; }
+body.admin .bouton.bouton-clair { background: transparent; color: var(--encre); }
+body.admin .bouton.bouton-clair:hover:not(:disabled) { background: var(--or-pale); color: var(--encre); border-color: var(--or); }
+body.admin .bouton.danger { color: var(--brique); border-color: color-mix(in srgb, var(--brique) 50%, transparent); }
+:focus-visible { outline: 2px solid var(--azur-vif); outline-offset: 2px; }
+
+/* Menu de gauche, en groupes */
+.nav-groupe { display: grid; gap: 2px; margin-bottom: 18px; }
+.nav-titre { margin: 0 0 4px 14px; font: 500 .66rem/1.2 var(--titre); letter-spacing: .22em; text-transform: uppercase; color: var(--or); }
+
+/* Textes : les sections en onglets */
+.reglages-page { margin-bottom: 18px; }
+.sections-barre { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--ligne); }
+.section-onglet { padding: 8px 16px; border: 1px solid var(--ligne-forte); border-radius: 99px; background: var(--papier); cursor: pointer; font-size: .95rem; }
+.section-onglet:hover { border-color: var(--or); }
+body.admin .section-onglet[aria-selected="true"] { background: var(--encre); border-color: var(--encre); color: var(--fond); font-weight: 600; }
+.section-onglet.masque { opacity: .6; font-style: italic; }
+.section-onglet.nouveau { border-style: dashed; color: var(--azur); background: transparent; }
+.note-auto { margin: 0 0 14px; padding: 10px 14px; border-left: 4px solid var(--azur); background: var(--azur-pale); border-radius: 4px; font-size: .92rem; }
+.section-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 18px 0 14px; padding-top: 16px; border-top: 1px solid var(--ligne); }
+.case-inline { display: inline-flex; align-items: center; gap: 8px; margin-right: auto; cursor: pointer; }
+.case-inline input { width: 18px; height: 18px; accent-color: var(--mauve); }
+.options-section { margin-top: 6px; }
+
+/* Recadrer une photo */
+.crop-fond { position: fixed; inset: 0; z-index: 500; display: grid; place-items: center; padding: 20px; background: rgba(30, 16, 8, .6); }
+.crop-boite { width: min(420px, 100%); padding: 24px; border-radius: 10px; background: var(--papier); border: 1px solid var(--ligne-forte); box-shadow: var(--ombre-haute); display: grid; gap: 12px; justify-items: center; }
+.crop-boite h2 { font-size: 1.6rem; }
+.crop-boite .aide { margin: 0; text-align: center; color: var(--encre-2); font-size: .9rem; }
+.crop-vue { position: relative; touch-action: none; cursor: grab; border-radius: 4px; overflow: hidden; }
+.crop-vue:active { cursor: grabbing; }
+.crop-vue::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 999px rgba(30, 16, 8, .55), inset 0 0 0 2px rgba(255, 255, 255, .9); pointer-events: none; }
+.crop-canvas { display: block; }
+.crop-zoom { display: flex; align-items: center; gap: 12px; width: 100%; }
+.crop-zoom input { flex: 1; accent-color: var(--or); }
+.crop-actions { display: flex; gap: 10px; }
 
 body.admin { background: var(--fond); }
 .admin-barre { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; gap: 16px; padding: 12px 28px; background: color-mix(in srgb, var(--ivoire) 90%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--ligne); }
@@ -80,7 +125,11 @@ details.groupe-page > summary { font-family: var(--serif); font-size: 1.25rem; f
 .champ-riche { margin: 6px 0 18px; }
 .champ-riche > .etiquette { display: block; margin-bottom: 8px; }
 .editeur { border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--papier); }
-.editeur-barre { position: sticky; top: 130px; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 8px 10px; background: var(--creme); border-bottom: 1px solid var(--ligne-forte); border-radius: var(--rayon) var(--rayon) 0 0; }
+.editeur-outils { position: sticky; top: 58px; z-index: 20; background: var(--creme); border-radius: var(--rayon) var(--rayon) 0 0; border-bottom: 1px solid var(--ligne-forte); }
+.editeur-haut { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--ligne); }
+.eb-ajouter { padding: 5px 12px; border: 1px solid var(--ligne-forte); border-radius: 99px; background: var(--papier); cursor: pointer; font-size: .88rem; }
+.eb-ajouter:hover { background: var(--or-pale); border-color: var(--or); }
+.editeur-barre { position: static; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 8px 10px; background: var(--creme); border-bottom: 1px solid var(--ligne-forte); border-radius: var(--rayon) var(--rayon) 0 0; }
 .editeur-barre button { min-width: 34px; height: 34px; padding: 0 10px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--encre); font: inherit; font-size: 0.95rem; cursor: pointer; }
 .editeur-barre button:hover:not(:disabled) { background: var(--papier); border-color: var(--ligne-forte); }
 .editeur-barre button:disabled { opacity: 0.35; cursor: default; }
@@ -146,6 +195,6 @@ details.groupe-page > summary { font-family: var(--serif); font-size: 1.25rem; f
     .admin-qui { display: none; }
     .admin-contenu { padding: 20px 16px 80px; }
     .admin-actions { position: static; }
-    .editeur-barre { top: 64px; }
+    .editeur-outils { top: 100px; }
     .eb-aide { display: none; }
 }
