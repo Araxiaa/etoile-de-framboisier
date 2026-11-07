@@ -1,61 +1,109 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="jour">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Étoile de Framboisier — Meneur du Tonnerre</title>
-    <meta name="description" content="Étoile de Framboisier, jeune meneur pacifiste du Clan du Tonnerre : portrait, âge et neuf vies. Personnage de RP Warrior Cats.">
-    <meta name="theme-color" content="#FBF5EA">
+    <title>Étoile de Framboisier — Le roc au regard d’azur</title>
+    <meta name="description" content="Étoile de Framboisier, jeune meneur pacifiste du Clan du Tonnerre : personnalité, histoire, relations, règne. Personnage de RP Warrior Cats.">
+    <meta name="theme-color" content="#FBF2E2">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Caveat:wght@500;700&display=swap">
-    <script src="js/theme.js"></script>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/literata.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        /* Thème jour / nuit : choix mémorisé, sinon celui de l'appareil. Posé avant l'affichage : aucun clignotement. */
+        (function () {
+            var c = null; try { c = localStorage.getItem('theme'); } catch (e) {}
+            var nuit = c ? c === 'nuit' : !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.setAttribute('data-theme', nuit ? 'nuit' : 'jour');
+            var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', nuit ? '#0E1128' : '#FBF2E2');
+        })();
+    </script>
+    <link rel="stylesheet" href="css/tokens.css">
     <link rel="stylesheet" href="css/texte.css">
-    <link rel="stylesheet" href="css/composants.css">
-    <link rel="stylesheet" href="css/accueil.css">
+    <link rel="stylesheet" href="css/site.css">
 </head>
-<body data-page="accueil">
+<body>
+    <div class="progression" id="progression"></div>
+    <div class="decor" aria-hidden="true"></div>
+    <canvas id="ambiance" aria-hidden="true"></canvas>
+    <div class="halo" aria-hidden="true"></div>
+    <a class="evitement" href="#vue">Aller au contenu</a>
 
-    <div id="entete"></div>
+    <header class="haut">
+        <a class="marque" href="#accueil" id="marque" aria-label="Étoile de Framboisier, accueil">
+            <span class="logo-place"></span><span>Étoile de Framboisier</span>
+            <em class="reve-note" aria-hidden="true">…il rêve.</em>
+        </a>
+        <nav aria-label="Navigation principale"><ul class="menu" id="menu"></ul></nav>
+        <div class="outils">
+            <button class="outil" id="chercher" type="button" aria-label="Rechercher (touche /)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+            </button>
+            <button class="outil theme" id="theme" type="button" aria-label="Passer du jour à la nuit">
+                <svg class="i-jour" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+                <svg class="i-nuit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+            </button>
+            <button class="bouton-menu" id="burger" type="button" aria-expanded="false" aria-controls="volet"><i></i>Ciel</button>
+        </div>
+    </header>
 
-    <main id="contenu">
-        <section class="heros conteneur">
-            <img class="heros-branche g" src="assets/decor/branche.svg" alt="" width="620" height="760">
-            <img class="heros-branche d" src="assets/decor/branche.svg" alt="" width="620" height="760">
+    <nav class="sous" id="sous" aria-label="Dans cette partie" hidden></nav>
 
-            <div class="couronne" id="couronne" aria-live="polite"></div>
-            <figure class="portrait-arche">
-                <img id="h-portrait" src="assets/photos/Headshot%20Etoile%20de%20Framboisier%20Oriyakii.webp" alt="Portrait d'Étoile de Framboisier, meneur du Clan du Tonnerre" width="680" height="680" fetchpriority="high">
-            </figure>
+    <div class="volet" id="volet" hidden role="dialog" aria-label="Carte du site">
+        <nav>
+            <p class="volet-titre">Carte du ciel</p>
+            <p class="volet-phrase">Chaque étoile est une partie du site. Choisis ta constellation.</p>
+            <ul class="constellation" id="constellation"></ul>
+        </nav>
+    </div>
 
-            <h1 id="h-nom"><span class="nom-petit">Étoile de</span><span class="nom-grand">Framboisier</span></h1>
-            <p class="etiquette fonction" id="h-fonction">Meneur du Clan du Tonnerre</p>
-            <p class="devise" id="h-devise">« Le roc au regard d'azur »</p>
+    <div class="recherche" id="recherche" hidden role="dialog" aria-label="Rechercher dans le site">
+        <div class="recherche-boite">
+            <input id="recherche-champ" type="search" placeholder="Chercher un mot, un chat, une lune…" autocomplete="off" aria-label="Rechercher">
+            <ul class="recherche-liste" id="recherche-liste"></ul>
+            <p class="recherche-aide">↑ ↓ pour choisir · Entrée pour ouvrir · Échap pour fermer</p>
+        </div>
+    </div>
 
-            <ul class="faits" id="h-faits"></ul>
-
-            <ul class="entrees" aria-label="Explorer le site">
-                <li><a href="personnalite.html">Personnalité</a></li>
-                <li><a href="physique.html">Physique</a></li>
-                <li><a href="histoire.html">Histoire</a></li>
-                <li><a href="relations.html">Relations</a></li>
-                <li><a href="galerie.html">Galerie</a></li>
-                <li><a href="regne.html">Le règne</a></li>
-            </ul>
-        </section>
+    <main class="principal" id="principal" tabindex="-1">
+        <div id="vue" class="vue"></div>
     </main>
 
-    <div id="pied"></div>
+    <footer class="pied">
+        <div>
+            <p class="devise">« Le roc au regard d’azur »</p>
+            <p>Codex d’Étoile de Framboisier — créé pour <em>@.araxia.</em> · Inspiré de <em>@Oriyakii</em></p>
+        </div>
+        <a class="secret" href="admin.html" aria-label="Accès réservé" title="Psst…">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17 9 5l8 6h6l8-6 2 12c1 2 1.500 4 1.500 7 0 7-6 11-14.500 11S5.500 31 5.500 24c0-3 .5-5 1.500-7z"/>
+                <g class="oeil-clos"><path d="M12 22q3 2.500 6 0"/></g>
+                <g class="oeil-ouvert"><circle cx="15" cy="22" r="2.600" fill="currentColor"/></g>
+                <path d="M23 22q3 2.500 6 0"/><path d="M18.500 28h3l-1.500 2z" fill="currentColor"/>
+            </svg>
+        </a>
+    </footer>
 
     <script src="js/outils.js"></script>
+    <script src="js/data/pages.js"></script>
     <script src="js/data/accueil.js"></script>
+    <script src="js/data/charte.js"></script>
+    <script src="js/data/fiche-physique.js"></script>
     <script src="js/data/vies.js"></script>
+    <script src="js/data/relations.js"></script>
+    <script src="js/data/lignee.js"></script>
+    <script src="js/data/journal.js"></script>
+    <script src="js/data/galerie.js"></script>
+    <script src="js/data/lunes.js"></script>
+    <script src="js/data/diplomatie.js"></script>
+    <script src="js/data/actions.js"></script>
+    <script src="js/data/blessures.js"></script>
     <script src="js/config.js"></script>
     <script src="js/donnees.js"></script>
-    <script src="js/accueil.js"></script>
+    <script src="js/riche.js"></script>
+    <script src="js/fiche.js"></script>
+    <script src="js/composants.js"></script>
+    <script src="js/ambiance.js"></script>
     <script src="js/site.js"></script>
 </body>
 </html>

@@ -2,7 +2,16 @@
    DASHBOARD — admin.html (réservé à l'administrateur) et éditeur de texte.
    ========================================================================== */
 
-body.admin { background: var(--ivoire); }
+/* Le dashboard garde ses anciens noms de couleurs : ils pointent vers la palette du site (css/tokens.css). */
+:root { --serif: var(--titre); --texte: var(--corps); --ivoire: var(--papier); --creme: var(--fond-2); --or-pale: color-mix(in srgb, var(--or) 16%, var(--papier)); --mauve-pale: color-mix(in srgb, var(--mauve) 14%, var(--papier)); --azur-pale: color-mix(in srgb, var(--azur) 12%, var(--papier)); --mousse-pale: color-mix(in srgb, var(--mousse) 14%, var(--papier)); --brique-pale: color-mix(in srgb, var(--brique) 14%, var(--papier)); --azur-profond: var(--azur); --rayon-s: 6px; --ombre-haute: 0 24px 60px -24px rgba(60, 30, 10, .5); }
+.carte { background: var(--papier); border: 1px solid var(--ligne); border-radius: var(--rayon-s); padding: 28px; }
+.bouton-clair { background: transparent; }
+.bouton-petit { padding: 8px 16px; font-size: .64rem; }
+.bouton-ajout { border-style: dashed; }
+html { scroll-padding-top: 90px; }
+body.admin { line-height: 1.6; }
+
+body.admin { background: var(--fond); }
 .admin-barre { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; gap: 16px; padding: 12px 28px; background: color-mix(in srgb, var(--ivoire) 90%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--ligne); }
 .admin-retour { font-family: var(--serif); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--encre-2); }
 .admin-titre { margin-right: auto; font-family: var(--serif); font-style: italic; font-size: 1.35rem; }

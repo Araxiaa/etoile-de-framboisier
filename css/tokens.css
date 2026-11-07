@@ -1,0 +1,99 @@
+/* ==========================================================================
+   ÉTOILE DE FRAMBOISIER — « l'heure dorée sur les Rochers du Soleil »
+   Les variables du haut changent toute l'ambiance.
+   Thème JOUR  : la lumière dorée de fin d'après-midi, un ciel d'azur (ses yeux), la pierre chaude.
+   Thème NUIT  : un ciel d'étoiles (son nom), où brillent ses vies.
+   ========================================================================== */
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/fraunces.woff2) format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/fraunces-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Literata'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(../assets/fonts/literata.woff2) format('woff2'); }
+@font-face { font-family: 'Literata'; font-style: italic; font-weight: 400 700; font-display: swap; src: url(../assets/fonts/literata-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Caveat'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../assets/fonts/caveat.woff2) format('woff2'); }
+
+:root {
+    /* La lumière : un après-midi doré */
+    --fond: #FBF2E2;
+    --fond-2: #F5E6CB;
+    --papier: #FFFAF0;
+    --carte: #FFF7E8;
+    --ligne: #DCC6A4;
+    --ligne-forte: #B9976B;
+    --encre: #2A1A12;           /* brun profond */
+    --encre-2: #52392B;
+    --doux: #7E6250;
+
+    /* Ses couleurs */
+    --azur: #1F7BA6;            /* ses yeux (lisible sur crème) */
+    --azur-clair: #86CBEA;
+    --azur-vif: #3FBBE2;
+    --or: #D9822B;              /* l'abricot de ses extrémités */
+    --or-clair: #F5C078;
+    --framboise: #B3365A;       /* le fruit de son nom */
+    --framboise-pale: #F6D9DF;
+    --mauve: #8A5496;           /* ses freesias */
+    --mousse: #587A45;
+    --roc: #77645A;
+    --brique: #B24C36;
+
+    /* Le ciel et le soleil */
+    --ciel-haut: #7DBCE0;
+    --ciel-mi: #BFE0F0;
+    --ciel-bas: #FCE3BC;
+    --soleil-a: #FFF8DE; --soleil-b: #FFD98A; --soleil-c: #F2A042; --soleil-d: #D9702A;
+    --lueur: rgba(255, 190, 100, .38);
+    --colline-1: #E8B98A; --colline-2: #D49A75; --colline-3: #B97E69; --colline-4: #8E5C58;
+    --orage: #6D5A86;
+    --roche-a: #A58F82; --roche-b: #7C675D; --roche-c: #54433D;
+
+    --verre: rgba(251, 242, 226, .82);
+    --ombre: 0 18px 40px -22px rgba(92, 52, 20, .45);
+    --sur-or: #2A1A12;
+
+    --titre: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --corps: 'Literata', Georgia, 'Times New Roman', serif;
+    --main: 'Caveat', 'Segoe Print', cursive;
+
+    --rayon: 4px;
+    --haut: 68px;
+    --gut: clamp(18px, 4vw, 56px);
+    --ease: cubic-bezier(.22, .8, .26, 1);
+    color-scheme: light;
+}
+
+:root[data-theme="nuit"] {
+    --fond: #0E1128;
+    --fond-2: #161A3A;
+    --papier: #171B3B;
+    --carte: #1B2046;
+    --ligne: #2E3466;
+    --ligne-forte: #4A5190;
+    --encre: #F6ECDD;
+    --encre-2: #DDD0C6;
+    --doux: #A9A3C4;
+
+    --azur: #7AD0F2;
+    --azur-clair: #B4E6FA;
+    --azur-vif: #5CCBF0;
+    --or: #F3B25B;
+    --or-clair: #FFD69A;
+    --framboise: #F28AA6;
+    --framboise-pale: #4A2440;
+    --mauve: #D79BE0;
+    --mousse: #A5CC8C;
+    --roc: #A59AB8;
+    --brique: #F0907A;
+
+    --ciel-haut: #070A1C;
+    --ciel-mi: #151A42;
+    --ciel-bas: #2A2358;
+    --soleil-a: #FFFBE8; --soleil-b: #FFE9A8; --soleil-c: #F6C05E; --soleil-d: #D88F3A;
+    --lueur: rgba(243, 178, 91, .16);
+    --colline-1: #3A3166; --colline-2: #2D2755; --colline-3: #221E45; --colline-4: #181638;
+    --orage: #8A78C0;
+    --roche-a: #4A426E; --roche-b: #342F55; --roche-c: #1F1C3A;
+
+    --verre: rgba(14, 17, 40, .84);
+    --ombre: 0 18px 40px -22px rgba(0, 0, 0, .8);
+    --sur-or: #1B1230;
+    color-scheme: dark;
+}
